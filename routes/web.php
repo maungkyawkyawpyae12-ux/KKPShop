@@ -1,10 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+Route::get('/',[App\Http\Controllers\FrontController::class,'shop'])->name('shop');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
