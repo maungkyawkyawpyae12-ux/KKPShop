@@ -6,6 +6,10 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use App\Models\Item;
+use App\Models\Payment;
+use App\Models\Order;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,5 +27,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         Category::factory(10)->create();
+        Item::factory(10)->create();
+        
     }
 }
