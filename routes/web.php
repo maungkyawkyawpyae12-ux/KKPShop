@@ -6,7 +6,7 @@ Route::get('/shop-item/{id}',[App\Http\Controllers\FrontController::class,'shopI
 Route::group(['prefix'=>'backend','as'=>'backend.'],function(){
     Route::get('/',[App\Http\Controllers\Admin\DashboardController::class,'index'])->name('dashboard');
     Route::resource('items',App\Http\Controllers\Admin\ItemController::class);
-    Route::resourse('create',App\Http\Controllers\Admin\)
+    
 
 });
 Auth::routes();

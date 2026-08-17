@@ -46,7 +46,7 @@
                                             <td>{{$item->code_no}}</td>
                                             <td>{{$item->name}}</td>
                                             <td>{{$item->price}}</td>
-                                            <td>{{$item->in_stock}}</td>
+                                            <td>{{$item->on_stock}}</td>
                                             <td>{{$item->category_id}}</td>
                                             <td>
                                                 <a href="" class="btn btn-sn btn-warning">Edit</a>
@@ -55,7 +55,21 @@
                                         </tr>
                                         @endforeach
                                    </tbody>
+                                   <h1 class="mt-4">Item</h1>
+
+<a href="{{ route('backend.items.create') }}" 
+   class="btn btn-primary mb-3">
+    Create Item
+</a>
+
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">
+        <a href="{{ route('backend.dashboard') }}">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Items</li>
+</ol>
                                    {{$items->links()}}
+                                   {{$item->category_id}}
                                 </table>
                             </div>
                         </div>

@@ -16,7 +16,7 @@
     <label class="form-label">Code No</label>
     <input type="text"
            name="code_no"
-           value=""
+           value="{{old('code_no')}}"
            class="form-control"
            placeholder="eg. 1234">
 
@@ -27,7 +27,7 @@
     <label class="form-label">Item Name</label>
     <input type="text"
            name="name"
-           value=""
+           value="{{ old('name')}}"
            class="form-control ">
 
    </div>
@@ -47,7 +47,7 @@
     <label class="form-label">Price</label>
     <input type="number"
            name="price"
-           value=""
+           value="{{old('price')}}"
            class="form-control">
 
     
@@ -58,25 +58,55 @@
     <label class="form-label">Discount (%)</label>
     <input type="number"
            name="discount"
-           value=""
+           value="{{old('discount')}}"
            class="form-control">
 </div>
 
+         {{-- On Stock --}}
+                <div class="mb-3">
+
+                    <label for="on_stock"
+                           class="form-label">
+                        In Stock
+                    </label>
+
+                    <select class="form-select"
+                            id="on_stock"
+                            name="on_stock">
+
+                        <option value="">
+                            Choose Stock Status
+                        </option>
+
+                        <option value="Yes"
+                            {{ old('on_stock') == 'Yes' ? 'selected' : '' }}>
+                            Yes
+                        </option>
+
+                        <option value="No"
+                            {{ old('on_stock') == 'No' ? 'selected' : '' }}>
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
 <!-- In Stock -->
-   <div class="mb-3">
-        <label for="in_stock" class="form-label">In Stock</label>
-        <select class="form-select" id="in_stock" name="in_stock"  value="">
-          
-          <option value="" selected>Yes</option>
-          <option value="">No</option>
+   <!-- <div class="mb-3">
+        <label for="on_stock" class="form-label">In Stock</label>
+        <select class="form-select" id="on_stock" name="on_stock"  value="">
+          <option value="">Choose Stock status</option>
+          <option value="Yes" selected>Yes</option>
+          <option value="No">No</option>
         </select>
-              </div>
+              </div> -->
 <!-- Description -->
 <div class="mb-3">
     <label class="form-label">Description</label>
     <textarea name="description"
               rows="4"
-              class="form-control "></textarea>
+              class="form-control ">{{ old('discription') }}</textarea>
 
     </div>
 
@@ -88,9 +118,11 @@
             class="form-select">
 
         <option value="">Choose Category</option>
-            <option value="">
+        @foreach($categories as $category)
+            <option value="{{$category->id}}">
+                {{$category->name}}
             </option>
-        
+        @endforeach
     </select>
 </div>
 
