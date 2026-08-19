@@ -23,7 +23,7 @@ class ItemFactory extends Factory
             'image' => fake()->imageUrl(),
             'price' => fake()->randomFloat(2, 1, 100),
             'discount' => fake()->randomFloat(2, 0, 50),
-            'on_stock' => fake()->numberBetween(0, 100),
+            'in_stock' => fake()->numberBetween(0, 100),
             'description' => fake()->paragraph(),
             'category_id' => \App\Models\Category::factory(),
         ];

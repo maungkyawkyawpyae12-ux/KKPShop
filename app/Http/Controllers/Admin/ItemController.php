@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
-use App\Models\Category;
+use App\MOdels\Category;
+use App\Http\Requests\ItemRequest;
 class ItemController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class ItemController extends Controller
     public function index()
     {
         $items=Item::OrderBy('id','desc')->paginate(5);
-        return view('admin.items.index', compact('items'));
+        return view('admin.items.index',compact('items'));
     }
 
     /**
@@ -22,7 +23,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $categories= Category::orderBy('id','desc')->get();
+        $categories=Category::all();
         return view('admin.items.create',compact('categories'));
     }
 
@@ -31,42 +32,18 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
-            'code_no' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'price' => 'required',
-            'discount' => 'required',
-            'on_stock' => 'required',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-        ]);
-        $item = new Item();
+        // dd($request);
+        $items=Item::create($request->all());
+        $file_name=time().'.'.$request->image->extension();
+        $upload=$request->image->move(public_path('images/items/'),$file_name);
+        if($upload)
+            {
+                $items->image="images/items/".$file_name;
+            }
+        $items->save();
+        return redirect()->route('backend.items.index');
+        
 
-        $item->code_no = $request->code_no;
-        $item->name = $request->name;
-        $item->price = $request->price;
-        $item->discount = $request->discount;
-        $item->on_stock = $request->on_stock;
-        $item->description = $request->description;
-        $item->category_id = $request->category_id;
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-
-            $image->move(public_path('images/items'), $imageName);
-
-            $item->image = $imageName;
-        }
-
-        $item->save();
-
-        return redirect()
-            ->route('backend.items.index')
-            ->with('success', 'Item created successfully.');
-    
     }
 
     /**

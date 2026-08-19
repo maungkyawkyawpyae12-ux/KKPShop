@@ -18,7 +18,7 @@ class Item extends Model
         'image',
         'price',
         'discount',
-        'on_stock',
+        'in_stock',
         'description',
         'category_id'
     ];
