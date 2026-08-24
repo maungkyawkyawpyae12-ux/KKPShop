@@ -6,11 +6,11 @@
     </div>
  @endif
          <div class="container-fluid px-4">
-                        <h1 class="mt-4">Item</h1>
-                        <a href="{{route('backend.items.create')}}" class="btn btn-primary float-end">Create Item</a>
+                        <h1 class="mt-4">Payment</h1>
+                        <a href="{{route('backend.payments.create')}}" class="btn btn-primary float-end">Create Payment</a>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="{{route('backend.dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Items</li>
+                            <li class="breadcrumb-item active">Payments</li>
                         </ol>
                         
                         <div class="card mb-4">
@@ -22,23 +22,15 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>No.</th>
-                                            <th>Code No</th>
+                                            <th>No.</th>                                           
                                             <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Instock</th>
-                                            <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                        <tr>
-                                            <th>No.</th>
-                                            <th>Code No</th>
+                                            <th>No.</th>                                           
                                             <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Instock</th>
-                                            <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -46,23 +38,21 @@
                                     @php
                                     $i=1;
                                     @endphp
-                                    @foreach($items as $item)
+                                    @foreach($payments as $payment)
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{$item->code_no}}</td>
-                                        <td>{{$item->name}}</td>
-                                        <td>{{$item->price}}</td>
-                                        <td>{{$item->in_stock}}</td>
-                                        <td>{{$item->category_id}}</td>
+                                        
+                                        <td>{{$payment->name}}</td>
+                                        
                                         <td>
-                                            <a href="{{route('backend.items.edit',$item->id)}}" class="btn btn-sn btn-primary">Edit</a>
-                                            <button class="btn btn-sn btn-danger delete" data-id="{{$item->id}}">Delete</button>
+                                            <a href="{{route('backend.payments.edit',$payment->id)}}" class="btn btn-sn btn-primary">Edit</a>
+                                            <button class="btn btn-sn btn-danger delete" data-id="{{$payment->id}}">Delete</button>
                                         </td>
 
                                     </tr>
                                     @endforeach
                                    </tbody>
-                                   {{$items->links()}}
+                                   
                                 </table>
                             </div>
                         </div>
@@ -105,7 +95,7 @@
                 $('tbody').on('click','.delete',function(){
                     let id=$(this).data('id');
                     // console.log(id);
-                    $('#deleteForm').attr('action',`items/${id}`);
+                    $('#deleteForm').attr('action',`payments/${id}`);
                     $('#deleteModal').modal('show');
 
                 })

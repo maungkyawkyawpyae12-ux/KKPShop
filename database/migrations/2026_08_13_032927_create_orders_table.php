@@ -19,21 +19,21 @@ return new class extends Migration
             $table->string('payment_slip');
             $table->string('status');
             $table->string('note');
-            $table->unsignedBigInteger('item_id');
-            $table->foreign('item_id')
-                  ->references('id')
-                  ->on('items')
-                  ->onDelete('cascade');
-            $table->unsignedBigInteger('payment_id');
-            $table->foreign('payment_id')
-                  ->references('id')
-                  ->on('payments')
-                  ->onDelete('cascade');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users')
-                  ->onDelete('cascade');  
+            // $table->unsignedBigInteger('item_id');
+            // $table->foreign('item_id')
+            //       ->references('id')
+            //       ->on('items')
+            //       ->onDelete('cascade');
+            // $table->unsignedBigInteger('payment_id');
+            // $table->foreign('payment_id')
+            //       ->references('id')
+            //       ->on('payments')
+            //       ->onDelete('cascade');
+            // $table->unsignedBigInteger('user_id');
+            // $table->foreign('user_id')
+            //       ->references('id')
+            //       ->on('users')
+            //       ->onDelete('cascade');  
             $table->softDeletes();     
             $table->timestamps();
         });

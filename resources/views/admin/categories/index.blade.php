@@ -6,39 +6,31 @@
     </div>
  @endif
          <div class="container-fluid px-4">
-                        <h1 class="mt-4">Item</h1>
-                        <a href="{{route('backend.items.create')}}" class="btn btn-primary float-end">Create Item</a>
+                        <h1 class="mt-4">Category</h1>
+                        <a href="{{route('backend.categories.create')}}" class="btn btn-primary float-end">Create Category</a>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="{{route('backend.dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Items</li>
+                            <li class="breadcrumb-item active">Categories</li>
                         </ol>
                         
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Item Lists
+                                Categories Lists
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Code No</th>
                                             <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Instock</th>
-                                            <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                        <tr>
                                             <th>No.</th>
-                                            <th>Code No</th>
                                             <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Instock</th>
-                                            <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -46,23 +38,19 @@
                                     @php
                                     $i=1;
                                     @endphp
-                                    @foreach($items as $item)
+                                    @foreach($categories as $category)
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{$item->code_no}}</td>
-                                        <td>{{$item->name}}</td>
-                                        <td>{{$item->price}}</td>
-                                        <td>{{$item->in_stock}}</td>
-                                        <td>{{$item->category_id}}</td>
+                                        <td>{{$category->name}}</td>
                                         <td>
-                                            <a href="{{route('backend.items.edit',$item->id)}}" class="btn btn-sn btn-primary">Edit</a>
-                                            <button class="btn btn-sn btn-danger delete" data-id="{{$item->id}}">Delete</button>
+                                            <a href="{{route('backend.categories.edit',$category->id)}}" class="btn btn-sn btn-primary">Edit</a>
+                                            <button class="btn btn-sn btn-danger delete" data-id="{{$category->id}}">Delete</button>
                                         </td>
 
                                     </tr>
                                     @endforeach
                                    </tbody>
-                                   {{$items->links()}}
+                                   
                                 </table>
                             </div>
                         </div>
@@ -105,7 +93,7 @@
                 $('tbody').on('click','.delete',function(){
                     let id=$(this).data('id');
                     // console.log(id);
-                    $('#deleteForm').attr('action',`items/${id}`);
+                    $('#deleteForm').attr('action',`categories/${id}`);
                     $('#deleteModal').modal('show');
 
                 })
