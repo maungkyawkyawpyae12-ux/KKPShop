@@ -81,7 +81,7 @@ class CategoryController extends Controller
                         unlink(public_path($request->old_image));
 
                     }
-                    $file_name=time().'.'.$request->imge->extension();
+                    $file_name=time().'.'.$request->image->extension();
                     $request->image->move(public_path('images/categories'),$file_name);
                     $category->image="image/categories/".$file_name;
             }

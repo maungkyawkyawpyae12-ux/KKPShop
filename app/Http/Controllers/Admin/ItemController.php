@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
-use App\MOdels\Category;
+use App\Models\Category;
 use App\Http\Requests\ItemRequest;
 class ItemController extends Controller
 {
@@ -68,7 +68,7 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ItemRequest $request, string $id)
     {
         $item=Item::findOrFail($id);
         $request->validate([
@@ -95,9 +95,9 @@ class ItemController extends Controller
                         unlink(public_path($request->old_image));
 
                     }
-                    $file_name=time().'.'.$request->imge->extension();
+                    $file_name=time().'.'.$request->image->extension();
                     $request->image->move(public_path('images/items'),$file_name);
-                    $item->image="image/items/".$file_name;
+                    $item->image="images/items/".$file_name;
             }
             $item->save();
             return redirect()->route('backend.items.index')->with('success','Item update successfully');
